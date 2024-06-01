@@ -57,44 +57,6 @@ This Discord Mention Assistant empowers you to manage mentions effectively, enha
 
 Here's an example of what the bot code might look like:
 
-```python
-import discord
-
-TOKEN = 'YOUR_BOT_TOKEN_HERE'
-BOT_OWNER_ID = 'YOUR_USER_ID_HERE'
-NOTIFICATION_CHANNEL_ID = 'YOUR_NOTIFICATION_CHANNEL_ID_HERE'
-
-intents = discord.Intents.default()
-intents.message_content = True
-
-class MyBot(discord.Client):
-    def __init__(self, intents):
-        super().__init__(intents=intents)
-
-    async def on_ready(self):
-        print(f'Logged in as {self.user}')
-
-    async def on_message(self, message):
-        if self.user.mentioned_in(message):
-            if message.author.id != int(BOT_OWNER_ID):
-                owner = await self.fetch_user(int(BOT_OWNER_ID))
-                await owner.send(
-                    f'You were mentioned by {message.author} (ID: {message.author.id}) in {message.channel} (ID: {message.channel.id}):\n\n{message.content}'
-                )
-                if NOTIFICATION_CHANNEL_ID:
-                    channel = self.get_channel(int(NOTIFICATION_CHANNEL_ID))
-                    if channel:
-                        await channel.send(
-                            f'{owner.name} was mentioned by {message.author} (ID: {message.author.id}) in {message.channel} (ID: {message.channel.id}):\n\n{message.content}'
-                        )
-
-client = MyBot(intents=intents)
-client.run(TOKEN)
-```
-
-Replace the placeholders in the code with your bot token, user ID, and optionally the notification channel ID to get started.
-
----
 
 ### License
 
@@ -103,3 +65,5 @@ Include a `LICENSE` file to specify the license under which you distribute your 
 ---
 
 Enhance your Discord server management with this Mention Assistant. Set it up now and enjoy a streamlined workflow and improved availability!
+
+### u can use this bot for ur personal use but after liking the repo and forking it other wise not
