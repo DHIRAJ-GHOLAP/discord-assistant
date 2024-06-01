@@ -1,4 +1,4 @@
-import discord,Confidential
+import discord,Confidential,time
 
 intents = discord.Intents.default()
 intents.members = True  #
@@ -35,29 +35,40 @@ class MyBot(discord.Client):
         notification_channel = self.get_channel(NOTIFICATION_CHANNEL_ID)
         
         if bot_owner_mentioned:
-          dm_message += f" You were mentioned by {message.author.mention}({message.author.name}) in {message.channel.name}:\n"
-        #   notification_message = f"**Hey!** You were mentioned by {message.author.mention}({message.author.name}) in {message.channel.name}:\n"
-        #   notification_message += f"{message.content}"                   
-        #   await notification_channel.send(notification_message)
-          
+            message_id = message.id
+            
+              # Do something with the message ID (e.g., print it)
+            print(f"Message ID: {message_id}")
+            
+            channel = self.get_channel(message.channel.id)  # Assuming you have the channel ID
+            filterd_message  = await channel.fetch_message(message_id)
+            fetched_message = filterd_message.clean_content()
+            print(f"Fetched message content: {fetched_message.content}")
+            dm_message += f" You were mentioned by {message.author.mention}({message.author.name})\n {message.channel.name}:\n {fetched_message.content}"
+        #   
 
         elif owner_role_mentioned:
-            dm_message += f" You were mentioned by {message.author.mention}({message.author.name}) in {message.channel.name}:\n"
+            message_id = message.id
             
+              # Do something with the message ID (e.g., print it)
+            print(f"Message ID: {message_id}")
+            
+            channel = self.get_channel(message.channel.id)  # Assuming you have the channel ID
+            fetched_message = await channel.fetch_message(message_id)
+            print(f"Fetched message content: {fetched_message.content}")
+            dm_message += f" You were mentioned by {message.author.mention}({message.author.name}) in {message.channel.name}: {fetched_message.content}\n"
+            
+            t = time.localtime()
             notification_channel = self.get_channel(NOTIFICATION_CHANNEL_ID)
             # Construct the notification message
-            notification_message = f"**Hey!** You were mentioned by {message.author.mention}({message.author.name}) in {message.channel.name}:\n"
-            notification_message += f"{message.content}"
-
+            notification_message = f"**Hey!** You were mentioned by {message.author.mention}({message.author.name}) in {message.channel.name} on {time.strftime("%H %M %S || %p")}:\n"
+            notification_message += f"{fetched_message.content}"
+                    # Access other message attributes like author, embeds, attachments, etc.
+                
             # Send the notification message
             await notification_channel.send(notification_message)
           
-        #   dm_message += f" You were mentioned by {message.author.mention}({message.author.name}) in {message.channel.name}:\n"
-        #   notification_message = f"**Hey!** You were mentioned by {message.author.mention}({message.author.name}) in {message.channel.name}:\n"
-        #   notification_message += f"{message.content}"                   
-        #   await notification_channel.send(notification_message)
-        #   dm_message += f" The Owner role was mentioned in {message.channel.name} by {message.author.mention}({message.author.name}):\n {message.content}"
-        # Send the DM message
+        
         await dm_channel.send(dm_message)
       except discord.HTTPException as e:
         # Handle potential errors (e.g., DMs disabled)
