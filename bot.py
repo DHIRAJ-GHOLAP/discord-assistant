@@ -61,7 +61,7 @@ class MyBot(discord.Client):
             t = time.localtime()
             notification_channel = self.get_channel(NOTIFICATION_CHANNEL_ID)
             # Construct the notification message
-            notification_message = f"**Hey!** You were mentioned by {message.author.mention}({message.author.name}) in {message.channel.name} on {time.strftime("%H %M %S || %p")}:\n"
+            notification_message = f"**Hey!** You were mentioned by {message.author.mention}({message.author.name}) in {message.channel.name} on {time.strftime('%H %M %S || %p')}:\n"
             notification_message += f"{fetched_message.content}"
                     # Access other message attributes like author, embeds, attachments, etc.
                 
