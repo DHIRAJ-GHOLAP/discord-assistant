@@ -3,7 +3,7 @@ import re
 intents = discord.Intents.default()
 intents.members = True  #
 
-bot_token = ''
+bot_token_msg = ''
 userNames = []
 owo = 1226390402953908355 
 TnD = 1226448741582635059
@@ -55,7 +55,7 @@ class MyBot(discord.Client):
     
 
 client = MyBot(intents=intents)
-client.run(bot_token)
+client.run(bot_token_msg)
 def filter_msg():
     with open("dta.txt", 'r') as f:
         data = f.read()
