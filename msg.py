@@ -1,9 +1,9 @@
 import discord,time
-import re
+import re,Confidential
 intents = discord.Intents.default()
 intents.members = True  #
 
-bot_token_msg = ''
+bot_token_msg = Confidential.Bot_token
 userNames = []
 owo = 1226390402953908355 
 TnD = 1226448741582635059
