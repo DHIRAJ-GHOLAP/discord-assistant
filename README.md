@@ -39,7 +39,7 @@ pip install discord.py
 ### Run the Bot
 Execute the Python script using:
 ```bash
-python your_script_name.py
+python bot.py
 ```
 
 ## Additional Notes
